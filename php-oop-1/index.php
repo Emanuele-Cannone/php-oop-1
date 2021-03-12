@@ -1,71 +1,89 @@
+<!-- 
+- Creazione di una classe ‘Movie’
+- Dichiarazione delle proprietà della classe
+- Dichiarazione del costruttore
+- Dichiarazione di almeno un metodo.
+- Fare poi degli esempi di utilizzo della classe istanziando almeno due oggetti e stampando a schermo il valore delle proprietà. -->
+
+
 <?php
-// QUESTA GRIGLIA E' IMPOSTATA E SARA' USATA SEMPRE COSI, POSSIAMO CAMBIARE I NOMI DELLE VARIABILI MA 
-// L'IMPOSTAZIONE RIMANE SEMPRE LA STESSA
 
+// IMPOSTA LA STRUTTURA DELLA CLASSE
 
-$nomeServer = "localhost:8889"; // VEDI LA PAGINA INIZIALE DI MAMP PER COMPILARE I DATI
-$nomeUtente = "root";
-$pwUtente = "root";
-$nomeDb = "dbhotel"; // QUI VA INSERITO IL DB CHE VUOI CONSULTARE
-
-// Connect
-// IN QUESTO CREIAMO UN ISTANZA IN GRADO DI EFFETTUARE L'ESTRAZIONE DEI DATI CON I PARAMETRI CHE ABBIAMO PASSATO SOPRA
-$consultaDb = new mysqli($nomeServer, $nomeUtente, $pwUtente, $nomeDb);
-
-// Check connection
-// ADESSO ANDIAMO A FARE DELLE VERIFICHE 
-
-
-// FACCIAMO UN CONTROLLO: 
-if ($consultaDb && $consultaDb->connect_error) { // SE $consultaDb ESISTE && $consultaDb HA DEGLI ERRORI DI CONNESSIONE
-
-    // STAMPAMI 'CONNESSIONE FALLITA' .SPECIFICA DELL' ERRORE DI CONNESSIONE
-    echo "Connection failed: " . $consultaDb->connect_error;
-                                    // LA SINGOLA FRECCIA PERMETTE IL PASSAGGIO DELLA PROPRIETA'
-
-
-} else { // ALTRIMENTI SE NON VENGONO RISCONTRATI ERRORI
+class Movie {
     
-
-    // SALVA NELLA VARIABILE SQL I DATI CHE VUOI PRENDERE - (VEDI ESEMPI MY-SQL)
-    $roomFloor = "SELECT room_number, floor FROM stanze";
-
-    //!!!!!!!!!!!!!!!!!! IL RISULTATO VA SEMPRE SALVATO IN VARIABILI!!!!!!!!!!!!!!!!!!!!!!
-
-    // IL RISULTATO E' LA CONSULTAZIONE DELL'ARRAY 
-    $risultato = $consultaDb->query($roomFloor);
-                    // QUERY E' IL METODO CHE CI PERMETTE DI CREARE UNA VARIABILE CHE ABBIA QUEL CONTENUTO TRA LE PARENTESI
+    public $titolo;
+    public $genere;
+    public $durata;
+    public $lingua;
+    public $anno;
 
 
-    // FACCIAMO UN ALTRO CONTROLLO:
-
-    
-    if ($risultato && $risultato->num_rows > 0) { // SE IL RISULTATO ESISTE && IL RISULTATO HA UN NUMERO DI RIGHE MAGGIORI DI 0
-
-        // ASSEGNAMO IL RISULTATO AD OGNI RIGA
-
-        // FINO A QUANDO:
-        // ESISTONO RIGHE DA ASSEGNARE ALLA VARIABILE $riga\
-        while($riga = $risultato->fetch_assoc()) {
-                            // FETCH_ASSOC E' IL METODO CHE MI PERMETTE DI ASSOCIARE OGNI RISULTATO ESISTENTE
-
-            // STAMPA TUTTO QUELLO CHE VUOI DALLA VARIABILE RIGA
-            echo "Stanza N. ". $riga['room_number']. " piano: ".$riga['floor'];
-
-        }
-
-        
-    } elseif ($result) { // ALTRIMENTI SE SOLAMENTE ($RISULTATO) ESISTE VUOL DIRE CHE NON CI SONO RIGHE IN QUELLA TABELLA
-
-        echo "0 results";
-
-        
-    } else { // ALTRIMENTI VUOL DIRE CHE ABBIAMO SBAGLIATO QUALCOSA
-
-        echo "query error";
-
+    // IN QUESTO CASO DECIDO QUALI PROPRIETA' DIVENTANO OBBLIGATORIE AL FINE DI CREARE L'OGGETTO
+    public function __construct($_titolo, $_genere){
+        $this->titolo = $_titolo;
+        $this->genere = $_genere;
     }
 
-    // QUESTO SERVE PER CHIUDERE LA CHIAMATA AL DATABASE
-    $consultaDb->close();
+
 }
+
+// CREA L'OGGETTO MADAGASCAR CON TUTTE LE PROPRIETA' DELLA CLASSE MOVIE
+
+// IN QUESTO MODO CREO QUALSIASI OGGETTO CON DELLE PROPRIETA' OBBLIGATORIE
+
+
+$madagascar = new Movie ('Madagascar', 'Cartone Animato');
+$madagascar -> durata = 100 ;
+$madagascar -> lingua = 'Italiano';
+$madagascar -> anno = 2010 ;
+
+
+$reLeone = new Movie ('Il Re Leone', 'Cartone Animato');
+$reLeone -> durata = 120 ;
+$reLeone -> lingua = 'Italiano';
+$reLeone -> anno = 2010 ;
+
+
+$aristogatti = new Movie ('Gli Aristogatti', 'Cartone Animato');
+$aristogatti -> durata = 100 ;
+$aristogatti -> lingua = 'Italiano,' ;
+$aristogatti -> anno = 2010 ;
+
+
+$up = new Movie ('Up', 'Cartone Animato');
+$up -> durata = 120 ;
+$up -> lingua = 'Italiano,' ;
+$up -> anno = 2010 ;
+
+?>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    
+        
+    <h3><?php echo $madagascar->titolo .' - ' .$madagascar->genere ;?></h3>
+    <h3><?php echo $reLeone->titolo .' - ' .$reLeone->genere ;?></h3>
+    <h3><?php echo $aristogatti->titolo .' - ' .$aristogatti->genere ;?></h3>
+    <h3><?php echo $up->titolo .' - ' .$up->genere ;?></h3>
+
+
+
+
+    
+    
+</body>
+</html>
