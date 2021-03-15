@@ -17,12 +17,28 @@ class Movie {
     public $durata;
     public $lingua;
     public $anno;
+    private $tipo = '22';
+
 
 
     // IN QUESTO CASO DECIDO QUALI PROPRIETA' DIVENTANO OBBLIGATORIE AL FINE DI CREARE L'OGGETTO
     public function __construct($_titolo, $_genere){
         $this->titolo = $_titolo;
         $this->genere = $_genere;
+    }
+
+
+
+    public function setFilmType($QualsiasiCosa){
+        if ($this->durata > 110){
+            $this->tipo = 'lungo';
+        } else {
+            $this->tipo = 'corto';
+        }
+    }
+    
+    public function getFilmType(){
+        return $this->tipo;
     }
 
 
@@ -34,27 +50,37 @@ class Movie {
 
 
 $madagascar = new Movie ('Madagascar', 'Cartone Animato');
-$madagascar -> durata = 100 ;
+$madagascar -> durata = 120 ;
 $madagascar -> lingua = 'Italiano';
 $madagascar -> anno = 2010 ;
+$madagascar->setFilmType($madagascar->durata);
+
+
+
+
+
 
 
 $reLeone = new Movie ('Il Re Leone', 'Cartone Animato');
 $reLeone -> durata = 120 ;
 $reLeone -> lingua = 'Italiano';
 $reLeone -> anno = 2010 ;
+$reLeone->setFilmType($reLeone->durata);
+
 
 
 $aristogatti = new Movie ('Gli Aristogatti', 'Cartone Animato');
 $aristogatti -> durata = 100 ;
 $aristogatti -> lingua = 'Italiano,' ;
 $aristogatti -> anno = 2010 ;
+$aristogatti->setFilmType($aristogatti->durata);
 
 
 $up = new Movie ('Up', 'Cartone Animato');
 $up -> durata = 120 ;
 $up -> lingua = 'Italiano,' ;
 $up -> anno = 2010 ;
+$up->setFilmType($up->durata);
 
 ?>
 
@@ -76,12 +102,16 @@ $up -> anno = 2010 ;
     
         
     <h3><?php echo $madagascar->titolo .' - ' .$madagascar->genere ;?></h3>
+    <h3><?php echo ' tipo: ' .$madagascar->getFilmType() ;?></h3>
     <h3><?php echo $reLeone->titolo .' - ' .$reLeone->genere ;?></h3>
+    <h3><?php echo ' tipo: ' .$reLeone->getFilmType() ;?></h3>
     <h3><?php echo $aristogatti->titolo .' - ' .$aristogatti->genere ;?></h3>
+    <h3><?php echo ' tipo: ' .$aristogatti->getFilmType() ;?></h3>
     <h3><?php echo $up->titolo .' - ' .$up->genere ;?></h3>
+    <h3><?php echo ' tipo: ' .$up->getFilmType() ;?></h3>
 
 
-
+    
 
     
     
